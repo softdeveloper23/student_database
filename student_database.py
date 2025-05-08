@@ -6,7 +6,7 @@ def print_student(students : dict, name : str) -> None:
         print(f"{name}: no such person in the database")
     else:
         print(f"{name}:")
-        print(f"\t{students[name]}")
+        print(f" {students[name]}")
 if __name__ == "__main__":
     students = {}
     add_student(students, "Peter")
