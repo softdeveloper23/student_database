@@ -21,12 +21,28 @@ def print_student(students : dict, name : str) -> None:
             average = total_grade / len(courses) if courses else 0
             print(f" average grade {average:.1f}")
 
-def add_course(students: dict, name : str, course: tuple) -> None:
+def add_course(students: dict, name: str, course: tuple) -> None:
     if name in students:
+        # Initialize empty list if no courses yet
         if students[name] == "no completed courses":
             students[name] = []
-        if course[1] != 0:
-            students[name].append(course)
+            
+        course_name, grade = course
+        
+        # Ignore courses with grade 0
+        if grade == 0:
+            return
+            
+        # Check if course already exists
+        for i, (existing_course, existing_grade) in enumerate(students[name]):
+            if existing_course == course_name:
+                # Only update if new grade is higher
+                if grade > existing_grade:
+                    students[name][i] = (course_name, grade)
+                return
+                
+        # If we get here, course doesn't exist yet, so add it
+        students[name].append(course)
 
 if __name__ == "__main__":
     students = {}
