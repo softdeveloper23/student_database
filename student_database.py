@@ -7,6 +7,13 @@ def print_student(students : dict, name : str) -> None:
     else:
         print(f"{name}:")
         print(f" {students[name]}")
+
+def add_course(students: dict, name : str, course: tuple) -> None:
+    if name in students:
+        if students[name] == "no completed courses":
+            students[name] = []
+        students[name].append(course)
+        
 if __name__ == "__main__":
     students = {}
     add_student(students, "Peter")
