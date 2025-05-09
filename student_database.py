@@ -6,18 +6,30 @@ def print_student(students : dict, name : str) -> None:
         print(f"{name}: no such person in the database")
     else:
         print(f"{name}:")
-        print(f" {students[name]}")
+        
+        if students[name] == "no completed courses":
+            print(f" {students[name]}")
+        else:
+            courses = students[name]
+            print(f" {len(courses)} completed courses:")
+
+            total_grade = 0
+            for course_name, grade in courses:
+                print(f"  {course_name} {grade}")
+                total_grade += grade
+
+            average = total_grade / len(courses) if courses else 0
+            print(f" average grade {average}")
 
 def add_course(students: dict, name : str, course: tuple) -> None:
     if name in students:
         if students[name] == "no completed courses":
             students[name] = []
         students[name].append(course)
-        
+
 if __name__ == "__main__":
     students = {}
     add_student(students, "Peter")
-    add_student(students, "Eliza")
+    add_course(students, "Peter", ("Introduction to Programming", 3))
+    add_course(students, "Peter", ("Advanced Course in Programming", 2))
     print_student(students, "Peter")
-    print_student(students, "Eliza")
-    print_student(students, "Jack")
